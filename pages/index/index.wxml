@@ -1,3 +1,4 @@
-<view>首页
-<text class="iconfont icon-home"></text>
+<view class="pyg-index">
+<SearchInput></SearchInput>
 </view>
+
