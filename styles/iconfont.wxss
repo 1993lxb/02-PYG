@@ -1,0 +1,24 @@
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_1925526_o9eoe6q00gd.eot?t=1594015195937'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_1925526_o9eoe6q00gd.eot?t=1594015195937#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAO8AAsAAAAAB9gAAANtAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqDOIJ9ATYCJAMMCwgABCAFhG0HPRvKBlFULepkPw9Mt3nS4Lyjs4mib5tChcI7X32VP7ToHQ//v9+3fe49X7WNOYlF96wa8RKokxhKozRSmI6W8Lam62YYlfNsiVpTTd+Rb3d6aco4j9MohZAgHPO/v/e+D2l0JJQAJtENQN1ZFGrA1Cfunf7VFJrPstzWojVtL/0YYNx5F+hYg+IJWmKBaMPYBS1xM4G+TR36ndXhrDUls1cgvsShqzUzVtlQGrpCu2JiRlxo6ZbzsoNvwffjv6vRpWhV5sD775aBNvnl1936tcn22iOop3ODTaPiCk0Sbyu9z5lR/ApTXzVZzbltKZSpQk1DoNIs7Y3+8QrRZhYPwTFMFH5x5AS/7iYUXL+fNkx+xw/MWf5iKrOZKmJrM/ihbLq/Obupb6p0ZqAlp3VwNjC3mH9Zd30dw6VpDkdyJZeB7D5ZUulA+RCW25kbrrSnoQHKGZTBN7uY3Gr73YSxca6xaW4sKKeGhauqYoCnNaXSIVV19d3s8NoyZmh1b2NDUA5UU8oIqAKw+mUZPJSzKofvXuaCQe8qH57Dsomgq9Q9yT3Vq8qL6oOqOuEKRNetfywI9eRe/rFeuGoq+DvratrcXmQJeURvlIYiQ2+My5hQ7lBV+6OFczJtyXbb5jjmQkA4s/xQwYAt0nWr8cqGpOZYgLY7kRIPzjH9CU4J9Wjp5rLfM1JlQKLMBK2gIsCYZOzer4A2IdO8DTxLPtPf60gWWHDRvCOu2WbUpknemU3BWpDqQAAA/j+bfi9MgP87GyT/224WnWWq/ck6rxi8f4LL47tLrOwuTGDXvStf8JeaZTafJNeasZposGTXhOqxkaMFfStIg4Jzv+GWlVZM6FolKDo2UHXtk8m5gpaBa2jruo6+M+vpAwvMFNnDqRdAmHqjGPuJaupDJueLlrU/2qZR0fc0FgsOHMbH9m1GVzAA7wmxT4WyHdIOS48Y1pnLaW0guiJXcQiGqur51BoL5CmGVLdwJKJAMeWwAtthlhGUTAn60otEynFfLazqRj2fcq3tNoZcAgWA5wnEfKSgvPqiXfj8EQrVMi5uYFUVrxCrxK2DoZ5BB3JtKjqxbuWayk1oRAgFKIzkwAq4UWbFCSir2yWQT/REA6KlsT6qpbqaestb8vfbAH3mSTVK1EjD91Tfaz/ClIrQ+kA5ahoAAAA=') format('woff2'),
+  url('//at.alicdn.com/t/font_1925526_o9eoe6q00gd.woff?t=1594015195937') format('woff'),
+  url('//at.alicdn.com/t/font_1925526_o9eoe6q00gd.ttf?t=1594015195937') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_1925526_o9eoe6q00gd.svg?t=1594015195937#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gouwuchekong:before {
+  content: "\e600";
+}
+
+.icon-home:before {
+  content: "\e64e";
+}
