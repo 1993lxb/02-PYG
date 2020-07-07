@@ -1,4 +1,5 @@
 //Page Object
+import {request} from "../../request/index.js"
 Page({
   data: {
     swiperList:[]
@@ -6,18 +7,24 @@ Page({
   },
   //options(Object)
   onLoad: function(options) {
-    wx.request({
-      url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
-      success: (result) => {
-        console.log(result);
-        this.setData({
+    // wx.request({
+    //   url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+    //   success: (result) => {
+    //     console.log(result);
+    //     this.setData({
+    //       swiperList:result.data.message
+    //     })
+        
+    //   },
+    //   fail: () => {},
+    //   complete: () => {}
+    // });
+    request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"}).then(result=>{
+
+     this.setData({
           swiperList:result.data.message
         })
-        
-      },
-      fail: () => {},
-      complete: () => {}
-    });
+    })
       
     
   },
