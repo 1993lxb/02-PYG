@@ -1,66 +1,34 @@
-// pages/category/index.js
+import { request } from "../../request/index.js"
 Page({
 
-  /**
-   * Page initial data
-   */
+
   data: {
+    leftMenuList: [],
+    rightContentList: [],
+    currentIndex:0
 
   },
+  cates: [],
 
-  /**
-   * Lifecycle function--Called when page load
-   */
+
   onLoad: function (options) {
+    this.getCatesList();
 
   },
+  getCatesList() {
+    request({
+      url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
+    }).then(res => {
+      this.cates = res.data.message;
+      let menuList = this.cates.map(v => v.cat_name);
+      let contentList = this.cates[0].children;
+      this.setData({
+        leftMenuList: menuList,
+        rightContentList: contentList
+      })
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
+    })
   }
+
+
 })
