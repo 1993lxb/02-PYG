@@ -5,7 +5,8 @@ Page({
   data: {
     leftMenuList: [],
     rightContentList: [],
-    currentIndex: 0
+    currentIndex: 0,
+    scrollTop:0
 
   },
   cates: [],
@@ -18,7 +19,7 @@ Page({
       this.getCatesList();
 
     }else{
-      if(Date.now()-cates.time>1000*10){
+      if(Date.now()-cates.time>1000*60*10){
         this.getCatesList();
 
       }else{
@@ -37,7 +38,7 @@ Page({
   },
   getCatesList() {
     request({
-      url: "https://api-hmugo-web.itheima.net/api/public/v1/categories"
+      url: "/categories"
     }).then(res => {
       this.cates = res.data.message;
       wx.setStorageSync("cates", { time: Date.now(), data: this.cates });
@@ -58,7 +59,8 @@ Page({
 
     this.setData({
       currentIndex: index,
-      rightContentList: contentList
+      rightContentList: contentList,
+      scrollTop:0
 
     })
 
