@@ -31,6 +31,17 @@ Page({
    */
   onLoad: function (options) {
 
+    console.log(options)
+  },
+  handletabsItemsChange(e){
+    console.log(e);
+    const {index}=e.detail;
+    let {tabs}=this.data;
+    tabs.forEach((v,i)=>i===index?v.isActive=true:v.isActive=false);
+    this.setData({
+      tabs
+    })
+
   }
 
   
