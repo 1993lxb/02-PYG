@@ -48,7 +48,9 @@ Page({
       url:"/goods/search",
       data:this.QueryParams
     }).then(res=>{
+      console.log(res.data);
       const {goods}=res.data.message;
+    //  const total=
       this.setData({
         goodsList:goods
       })
@@ -65,6 +67,10 @@ Page({
     this.setData({
       tabs
     })
+
+  },
+  onReachBottom(){
+    console.log("111")
 
   }
 
