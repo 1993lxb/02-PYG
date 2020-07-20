@@ -1,4 +1,4 @@
-// pages/goods_list/index.js
+import { request } from "../../request/index.js";
 Page({
 
   /**
@@ -22,8 +22,15 @@ Page({
         isActive:false
       }
 
-    ]
+    ],
+    goodsList:[]
 
+  },
+  QueryParams:{
+    query:"",
+    cid:"",
+    pagenum:1
+  //  pagesize:10
   },
 
   /**
@@ -31,8 +38,25 @@ Page({
    */
   onLoad: function (options) {
 
-    console.log(options)
+    this.QueryParams.cid=options.cid;
+    console.log(options);
+    this.getGoodsList();
+
   },
+  getGoodsList(){
+    request({
+      url:"/goods/search",
+      data:this.QueryParams
+    }).then(res=>{
+      const {goods}=res.data.message;
+      this.setData({
+        goodsList:goods
+      })
+    })
+    
+
+  },
+
   handletabsItemsChange(e){
     console.log(e);
     const {index}=e.detail;
