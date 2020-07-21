@@ -26,11 +26,12 @@ Page({
     goodsList:[]
 
   },
+  totalpage:1,
   QueryParams:{
     query:"",
     cid:"",
-    pagenum:1
-  //  pagesize:10
+    pagenum:1,
+    pagesize:10
   },
 
   /**
@@ -50,9 +51,13 @@ Page({
     }).then(res=>{
       console.log(res.data);
       const {goods}=res.data.message;
-    //  const total=
+      const total=res.data.message.total;
+      this.totalpage=Math.ceil(total/this.QueryParams.pagesize);
+      console.log(this.totalpage);
+
+
       this.setData({
-        goodsList:goods
+        goodsList:[...this.data.goodsList,...goods]
       })
     })
     
@@ -70,7 +75,22 @@ Page({
 
   },
   onReachBottom(){
-    console.log("111")
+    console.log(this.QueryParams.pagenum);
+    console.log(this.totalpage);
+
+    if(this.QueryParams.pagenum<this.totalpage){
+      this.QueryParams.pagenum++;
+      this.getGoodsList();
+
+    }else{
+      console.log("没有下一页书据了");
+      wx.showToast({
+        title: '没有下一页书据了'
+       
+      });
+        
+    }
+    
 
   }
 
