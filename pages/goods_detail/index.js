@@ -1,10 +1,12 @@
 // pages/goods_detail/index.js
+import { request } from "../../request/index.js";
 Page({
 
   /**
    * Page initial data
    */
   data: {
+    goodsObj: {}
 
   },
 
@@ -12,55 +14,24 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    //console.log(options)
+    const { goods_id } = options;
+    this.getGoodsDetail(goods_id)
 
   },
+  getGoodsDetail(goods_id) {
+    request({
+      url: "/goods/detail",
+      data: { goods_id }
+    }).then(res => {
+      const goodsObj = res.data.message;
+      this.setData({
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
+        goodsObj
+      })
+    })
   }
+
+
+
 })

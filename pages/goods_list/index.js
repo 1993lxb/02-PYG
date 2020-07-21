@@ -59,6 +59,8 @@ Page({
       this.setData({
         goodsList:[...this.data.goodsList,...goods]
       })
+      wx.stopPullDownRefresh();
+        
     })
     
 
@@ -92,6 +94,13 @@ Page({
     }
     
 
+  },
+  onPullDownRefresh(){
+    this.setData({
+      goodsList:[]
+    })
+    this.QueryParams.pagenum=1,
+    this.getGoodsList()
   }
 
   
