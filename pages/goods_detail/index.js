@@ -9,6 +9,7 @@ Page({
     goodsObj: {}
 
   },
+   goodsInfo:[],
 
   /**
    * Lifecycle function--Called when page load
@@ -25,12 +26,31 @@ Page({
       data: { goods_id }
     }).then(res => {
       const goodsObj = res.data.message;
+      this.goodsInfo=goodsObj;
       this.setData({
 
-        goodsObj
+        goodsObj:{
+          pics:goodsObj.pics,
+          goods_price:goodsObj.goods_price,
+          goods_name:goodsObj.goods_name,
+          goods_introduce:goodsObj.goods_introduce
+
+
+        }
       })
     })
+  },
+  handleTap(e){
+    const urls=this.goodsInfo.pics.map(v => v.pics_mid);
+    const current = e.currentTarget.dataset.url;
+    wx.previewImage({
+      current,
+      urls
+    });
+    
   }
+
+
 
 
 

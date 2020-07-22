@@ -1,10 +1,24 @@
-<!--pages/goods_detail/index.wxml-->
+<!-- pages/goods_detail/index.wxml -->
 <view class="detail-swiper">
   <swiper autoplay="{{true}}" circular="{{true}}" indicator-dots="{{true}}">
-     <swiper-item wx:for="{{goodsObj.pics}}" wx:key="pics_id">
-     <image  src="{{item.pics_mid}}" mode="widthFix"/>
-         
-     </swiper-item>
-       
+    <swiper-item wx:for="{{goodsObj.pics}}" wx:key="pics_id"
+    bindtap="handleTap"
+    data-url="{{item.pics_mid}}">
+      <image src="{{item.pics_mid}}" mode="widthFix" />
+    </swiper-item>
   </swiper>
+</view>
+<view class="goods_price">￥{{goodsObj.goods_price}}</view>
+<view class="goods_name_row">
+  <view class="goods_name">{{goodsObj.goods_name}}</view>
+  <view class="goods_collect">
+    <text class="iconfont icon-shoucang"></text>
+    <view class="collect_name">收藏</view>
+  </view>
+</view>
+<view class="goods_info">
+  <view class="goods_info_title">图文详情</view>
+  <view class="goods_info_content">
+    <rich-text nodes="{{goodsObj.goods_introduce}}"></rich-text>
+  </view>
 </view>
