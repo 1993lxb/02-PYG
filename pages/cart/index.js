@@ -7,6 +7,20 @@ Page({
    * Page initial data
    */
   data: {
+    address:{},
+    cart:[]
+
+  },
+  onShow:function(){
+  const address=wx.getStorageSync("address");
+  const cart=wx.getStorageSync("cart");
+    
+  this.setData({
+    address,
+    cart
+    
+  })
+    
 
   },
 
@@ -24,47 +38,50 @@ Page({
 
   },
   handleChooseAddress() {
-    // wx.getSetting({
-    //   success: (result) => {
-    //     const scopeAddress = result.authSetting["scope.address"];
-    //     if (scopeAddress === true || scopeAddress === undefined) {
-    //       wx.chooseAddress({
-    //         success: (result1) => {
-    //           console.log(result1)
-    //         }
-    //       });
-    //     }else{
-    //       wx.openSetting({
-    //         success: (result2) => {
-    //           wx.chooseAddress({
-    //             success: (result3) => {
-    //               console.log(result3)
-    //             }
-    //           });
-    //         },
-    //         fail: () => {},
-    //         complete: () => {}
-    //       });
+    wx.getSetting({
+      success: (result) => {
+        const scopeAddress = result.authSetting["scope.address"];
+        if (scopeAddress === true || scopeAddress === undefined) {
+          wx.chooseAddress({
+            success: (result1) => {
+               result1.all=result1.provinceName+result1.cityName+result1.countyName+result1.detailInfo;
 
-    //     }
-    //   },
-    // });
-    getSetting().then(result => {
-      const scopeAddress = result.authSetting["scope.address"];
-      if (scopeAddress === true || scopeAddress === undefined) {
-        chooseAddress().then(result1 => {
-          console.log(result1)
-        })
-      } else {
-        openSetting().then(result2 => {
-          chooseAddress().then(result3 => {
-            console.log(result3)
-          })
-        })
+              wx.setStorageSync("address", result1);
 
-      }
+            }
+          });
+        } else {
+          wx.openSetting({
+            success: (result2) => {
+              wx.chooseAddress({
+                success: (result3) => {
+                  result3.all=result3.provinceName+result3.cityName+result3.countyName+result3.detailInfo;
+                  wx.setStorageSync("address", result3);
+                }
+              });
+            },
 
-    })
+          });
+
+        }
+      },
+    });
+    // getSetting().then(result => {
+    //   const scopeAddress = result.authSetting["scope.address"];
+    //   if (scopeAddress === true || scopeAddress === undefined) {
+    //     chooseAddress().then(result1 => {
+    //       console.log(result1)
+    //     })
+    //   } else {
+    //     openSetting().then(result2 => {
+    //       chooseAddress().then(result3 => {
+    //         console.log(result3)
+    //       })
+    //     })
+
+    //   }
+
+    // })
 
   }
   // async handleChooseAddress() {
@@ -78,7 +95,7 @@ Page({
   //     } 
   //       let address = await chooseAddress();
   //       console.log(address);
-      
+
   //     // 4 调用获取收货地址的 api
 
   //     //  address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
