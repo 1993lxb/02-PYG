@@ -7,20 +7,40 @@ Page({
    * Page initial data
    */
   data: {
-    address:{},
-    cart:[]
-
+    address: {},
+    cart: [],
+    allchecked: false,
+    totalPrice: 0,
+    totalNum: 0
   },
-  onShow:function(){
-  const address=wx.getStorageSync("address");
-  const cart=wx.getStorageSync("cart");
-    
-  this.setData({
-    address,
-    cart
-    
-  })
-    
+  onShow: function () {
+    const address = wx.getStorageSync("address");
+    const cart = wx.getStorageSync("cart") || [];
+    let allchecked = true;
+    let totalPrice = 0;
+    let totalNum = 0;
+
+    cart.forEach(v => {
+      if (v.checked) {
+        totalPrice += v.goods_price * v.num;
+        totalNum += v.num;
+
+      } else {
+        allchecked = false;
+
+      }
+
+    });
+    allchecked = cart.length ? allchecked : false;
+
+    this.setData({
+      address,
+      cart,
+      allchecked,
+      totalPrice,
+      totalNum
+    })
+
 
   },
 
@@ -44,7 +64,7 @@ Page({
         if (scopeAddress === true || scopeAddress === undefined) {
           wx.chooseAddress({
             success: (result1) => {
-               result1.all=result1.provinceName+result1.cityName+result1.countyName+result1.detailInfo;
+              result1.all = result1.provinceName + result1.cityName + result1.countyName + result1.detailInfo;
 
               wx.setStorageSync("address", result1);
 
@@ -55,7 +75,7 @@ Page({
             success: (result2) => {
               wx.chooseAddress({
                 success: (result3) => {
-                  result3.all=result3.provinceName+result3.cityName+result3.countyName+result3.detailInfo;
+                  result3.all = result3.provinceName + result3.cityName + result3.countyName + result3.detailInfo;
                   wx.setStorageSync("address", result3);
                 }
               });
