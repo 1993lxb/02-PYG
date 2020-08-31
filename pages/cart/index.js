@@ -16,30 +16,10 @@ Page({
   onShow: function () {
     const address = wx.getStorageSync("address");
     const cart = wx.getStorageSync("cart") || [];
-    let allchecked = true;
-    let totalPrice = 0;
-    let totalNum = 0;
-
-    cart.forEach(v => {
-      if (v.checked) {
-        totalPrice += v.goods_price * v.num;
-        totalNum += v.num;
-
-      } else {
-        allchecked = false;
-
-      }
-
-    });
-    allchecked = cart.length ? allchecked : false;
-
-    this.setData({
-      address,
-      cart,
-      allchecked,
-      totalPrice,
-      totalNum
-    })
+this.setCart(cart);
+this.setData({
+  address
+})
 
 
   },
@@ -104,27 +84,42 @@ Page({
     // })
 
   }
-  // async handleChooseAddress() {
-  //   try {
-  //     // 1 获取 权限状态
-  //     const res1 = await getSetting();
-  //     const scopeAddress = res1.authSetting["scope.address"];
-  //     // 2 判断 权限状态
-  //     if (scopeAddress === false) {
-  //       await openSetting();
-  //     } 
-  //       let address = await chooseAddress();
-  //       console.log(address);
 
-  //     // 4 调用获取收货地址的 api
+  ,
+  handleItemChange(e){
+    const goods_id=e.currentTarget.dataset.id;
+    console.log(goods_id);
+    let {cart}=this.data;
+    let index=cart.findIndex(v=>v.goods_id===goods_id);
+    cart[index].checked=!cart[index].checked;
+   this.setCart(cart);
+  
 
-  //     //  address.all = address.provinceName + address.cityName + address.countyName + address.detailInfo;
+  },
+  setCart(cart){
+   
+    let allchecked = true;
+    let totalPrice = 0;
+    let totalNum = 0;
 
-  //     // 5 存入到缓存中
-  //     //   wx.setStorageSync("address", address);
+    cart.forEach(v => {
+      if (v.checked) {
+        totalPrice += v.goods_price * v.num;
+        totalNum += v.num;
 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // },
+      } else {
+        allchecked = false;
+
+      }
+
+    });
+    allchecked = cart.length ? allchecked : false;
+
+    this.setData({
+      cart,totalPrice,totalNum,allchecked
+    });
+    wx.setStorageSync("cart",cart);
+
+  }
+ 
 })
