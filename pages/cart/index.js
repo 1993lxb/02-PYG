@@ -1,5 +1,5 @@
 // pages/cart/index.js
-import { getSetting, chooseAddress, openSetting } from "../../utils/asyncWx.js";
+import { getSetting, chooseAddress, openSetting, showModal } from "../../utils/asyncWx.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
 
@@ -16,10 +16,10 @@ Page({
   onShow: function () {
     const address = wx.getStorageSync("address");
     const cart = wx.getStorageSync("cart") || [];
-this.setCart(cart);
-this.setData({
-  address
-})
+    this.setCart(cart);
+    this.setData({
+      address
+    })
 
 
   },
@@ -86,18 +86,18 @@ this.setData({
   }
 
   ,
-  handleItemChange(e){
-    const goods_id=e.currentTarget.dataset.id;
+  handleItemChange(e) {
+    const goods_id = e.currentTarget.dataset.id;
     console.log(goods_id);
-    let {cart}=this.data;
-    let index=cart.findIndex(v=>v.goods_id===goods_id);
-    cart[index].checked=!cart[index].checked;
-   this.setCart(cart);
-  
+    let { cart } = this.data;
+    let index = cart.findIndex(v => v.goods_id === goods_id);
+    cart[index].checked = !cart[index].checked;
+    this.setCart(cart);
+
 
   },
-  setCart(cart){
-   
+  setCart(cart) {
+
     let allchecked = true;
     let totalPrice = 0;
     let totalNum = 0;
@@ -116,10 +116,47 @@ this.setData({
     allchecked = cart.length ? allchecked : false;
 
     this.setData({
-      cart,totalPrice,totalNum,allchecked
+      cart, totalPrice, totalNum, allchecked
     });
-    wx.setStorageSync("cart",cart);
+    wx.setStorageSync("cart", cart);
+
+  },
+  handleItemAllChecked() {
+
+    let { cart, allchecked } = this.data;
+    allchecked = !allchecked;
+
+    cart.forEach(v => v.checked = allchecked);
+    this.setCart(cart);
 
   }
- 
+  ,
+  handleItemNumEdit(e) {
+
+    const { id, operation } = e.currentTarget.dataset;
+
+    let { cart } = this.data;
+
+
+    const index = cart.findIndex(v => v.goods_id === id);
+    if (cart[index].num == 1 && operation == -1) {
+
+      showModal("您是否需要删除？").then(
+        (res) => {
+          if (res.confirm) {
+            cart.splice(index, 1);
+            this.setCart(cart);
+          }
+
+        }
+
+      )
+    }else{
+
+    cart[index].num += operation;
+    this.setCart(cart);
+    }
+
+  }
+
 })
