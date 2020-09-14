@@ -70,6 +70,21 @@
 					"id": -1,
 					"name": "购物车",
 					"pathName": "pages/cart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/index",
+					"pathName": "pages/login/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/index",
+					"pathName": "pages/user/index",
+					"query": "",
 					"scene": null
 				}
 			]
